@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "EcAuth client-side authentication library (WebAuthn, PKCE)",
   "license": "LGPL-2.1-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EcAuth/ecauth-auth-js"
+  },
   "type": "module",
   "main": "dist/ecauth-auth.umd.js",
   "module": "dist/ecauth-auth.esm.js",
