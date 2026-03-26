@@ -1,6 +1,6 @@
 {
   "name": "@ecauth/auth-js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "EcAuth client-side authentication library (WebAuthn, PKCE)",
   "license": "LGPL-2.1-or-later",
   "repository": {
