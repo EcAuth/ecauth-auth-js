@@ -86,4 +86,4 @@ jobs:
         with:
           apiToken: ${{ env.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy cdn-dist --project-name=ecauth-cdn
+          command: pages deploy cdn-dist --project-name=ecauth-cdn --branch=main
