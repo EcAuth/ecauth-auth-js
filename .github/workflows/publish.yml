@@ -2,6 +2,9 @@ name: Publish
 on:
   release:
     types: [published]
+concurrency:
+  group: publish
+  cancel-in-progress: false
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -27,7 +30,25 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
       - run: pnpm run test
-      - run: pnpm publish --provenance --access public --no-git-checks
+
+      - name: Validate release tag matches package version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          TAG="${{ github.event.release.tag_name }}"
+          if [ "$TAG" != "v${VERSION}" ]; then
+            echo "::error::Release tag ($TAG) does not match package.json version (v${VERSION})"
+            exit 1
+          fi
+
+      - name: Publish to npm (skip if already published)
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          NAME=$(node -p "require('./package.json').name")
+          if npm view "${NAME}@${VERSION}" version 2>/dev/null; then
+            echo "::notice::${NAME}@${VERSION} is already published, skipping"
+          else
+            pnpm publish --provenance --access public --no-git-checks
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ env.NPM_TOKEN }}
 
