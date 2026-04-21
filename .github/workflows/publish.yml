@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
       - name: Load secrets from 1Password
-        uses: 1password/load-secrets-action@dafbe7cb03502b260e2b2893c753c352eee545bf # v3.2.1
+        uses: 1password/load-secrets-action@92467eb28f72e8255933372f1e0707c567ce2259 # v4.0.0
         with:
           export-env: true
         env:
