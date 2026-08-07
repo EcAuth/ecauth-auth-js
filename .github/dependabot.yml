@@ -16,8 +16,27 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
+    # minor/patch と major の 2 PR に集約する。
+    # patterns を "*" にしているのは、サードパーティ actions
+    # （anthropics/* 1password/* cloudflare/* 等）を取りこぼさないため。
+    groups:
+      github-actions-minor:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+      github-actions-major:
+        patterns:
+          - "*"
+        update-types:
+          - "major"
 
   # npm パッケージの自動更新
+  # このリポジトリの依存はすべて devDependencies（ビルド・テストツール）で、
+  # 配布物 dist/ にバンドルされる runtime 依存は持たない。
+  # そのため dependency-type による dev/prod 分割は行わず、
+  # minor/patch と major の 2 PR に集約する。
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
@@ -34,3 +53,15 @@ updates:
       include: "scope"
     allow:
       - dependency-type: "all"
+    groups:
+      npm-minor:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+      npm-major:
+        patterns:
+          - "*"
+        update-types:
+          - "major"
