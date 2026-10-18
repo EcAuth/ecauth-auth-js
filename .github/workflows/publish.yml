@@ -20,8 +20,8 @@ jobs:
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           NPM_TOKEN: op://EcAuth/npmjs-credentials/credential
-          CLOUDFLARE_API_TOKEN: op://EcAuth/cloudflare-credentials/CLOUDFLARE_API_TOKEN
-          CLOUDFLARE_ACCOUNT_ID: op://EcAuth/cloudflare-credentials/CLOUDFLARE_ACCOUNT_ID
+          CLOUDFLARE_API_TOKEN: op://skirnir-shared-secrets/cloudflare-api-token/CLOUDFLARE_API_TOKEN
+          CLOUDFLARE_ACCOUNT_ID: op://skirnir-common/cloudflare-account/CLOUDFLARE_ACCOUNT_ID
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: '22'
